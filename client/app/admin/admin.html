@@ -1,12 +1,27 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
-  <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
-  <ul class="list-group">
-    <li class="list-group-item" ng-repeat="user in users">
-        <strong>{{user.name}}</strong><br>
-        <span class="text-muted">{{user.email}}</span>
-        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
-    </li>
-  </ul>
+    <div class="row">
+        <div class="col-md-7">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Number Patient</th>
+                    <th>Delete</th>
+                </tr>
+                <tr ng-repeat="doc in doctors">
+                    <td>{{doc.lastName}} {{doc.firstName}}</td>
+                    <td>{{doc.address}}</td>
+                    <td>{{doc.nbPatient}} <button class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button><button class="btn btn-default"><i class="glyphicon glyphicon-minus"></i></button></td>
+                    <td><button class="btn btn-default" ng-click="removeDoctor(doc)"><i class="glyphicon glyphicon-trash"></i></button></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-5">
+            <h3>Add a new doctor</h3>
+            <div ng-include="'app/admin/partial/doctor.form.html'"></div>
+        </div>
+    </div>
+
 </div>

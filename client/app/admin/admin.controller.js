@@ -1,17 +1,38 @@
 'use strict';
 
 angular.module('timerDocFullstackApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User) {
+  .controller('AdminCtrl', function ($scope, $http, Auth, User, Doctor) {
 
-    // Use the User $resource to fetch all users
-    $scope.users = User.query();
+    $scope.doctor = {};
 
-    $scope.delete = function(user) {
-      User.remove({ id: user._id });
-      angular.forEach($scope.users, function(u, i) {
-        if (u === user) {
-          $scope.users.splice(i, 1);
-        }
-      });
-    };
+    $scope.me = Auth.getCurrentUser();
+    Doctor.get().success(function (data,status) {
+        $scope.doctors = data
+    });
+
+    $scope.addDoctor = function() {
+        $scope.doctor.adminID = Auth.getCurrentUser()._id;
+        $scope.doctor.nbPatient = 0;
+        $http.post('/api/doctors', $scope.doctor).
+            success(function(data, status, headers, config) {
+                // this callback will be called asynchronously
+                // when the response is available
+                console.log(data);
+                $scope.doctor = {};
+            }).
+            error(function(data, status, headers, config) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                console.log("Error");
+        });
+    }
+
+    $scope.removeDoctor = function(doc) {
+        $http.delete('/api/doctors/'+doc._id);
+        angular.forEach($scope.doctors, function(u, i) {
+            if (u === doc) {
+                $scope.doctors.splice(i, 1);
+            }
+        });
+    }
   });
