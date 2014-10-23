@@ -24,4 +24,12 @@ angular.module('timerDocFullstackApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
+
+    $scope.map = {
+        center: {
+            latitude: 48.583,
+            longitude: 7.750
+        },
+        zoom: 14
+    };
   });
