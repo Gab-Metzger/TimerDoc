@@ -13,8 +13,8 @@
                 <tr ng-repeat="doc in doctors">
                     <td>{{doc.lastName}} {{doc.firstName}}</td>
                     <td>{{doc.address}}</td>
-                    <td>{{doc.nbPatient}} <button class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button><button class="btn btn-default"><i class="glyphicon glyphicon-minus"></i></button></td>
-                    <td><button class="btn btn-default" ng-click="removeDoctor(doc)"><i class="glyphicon glyphicon-trash"></i></button></td>
+                    <td>{{doc.nbPatient}} <button class="btn btn-default" ng-click="addPatient(doc)"><i class="glyphicon glyphicon-plus"></i></button><button class="btn btn-default" ng-click="removePatient(doc)"><i class="glyphicon glyphicon-minus"></i></button></td>
+                    <td><button class="btn btn-default" ng-click="removeDoctor(doc.lastName,doc)"><i class="glyphicon glyphicon-trash"></i></button></td>
                 </tr>
             </table>
         </div>
