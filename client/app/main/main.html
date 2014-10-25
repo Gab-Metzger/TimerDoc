@@ -1,7 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <header>
-    <ui-gmap-google-map center="map.center" zoom="map.zoom">
+    <!--<ui-gmap-google-map center="map.center" zoom="map.zoom">
         <ui-gmap-marker ng-repeat="doctor in doctors"
                         coords="doctor.coords"
                         options="{
@@ -11,7 +11,36 @@
                         click="clickOnMarker(doctor)"
                         idkey="$index">
         </ui-gmap-marker>
-        <ui-gmap-search-box template="searchbox.template" position="searchbox.position"></ui-gmap-search-box>
+        <ui-gmap-search-box options="searchbox.options" template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
+    </ui-gmap-google-map>-->
+    <ui-gmap-google-map
+            center="map.center"
+            zoom="map.zoom"
+            dragging="map.dragging"
+            bounds="map.bounds"
+            events="map.events"
+            options="map.options"
+            pan="true"
+            control="map.control"
+            >
+        <ui-gmap-marker ng-repeat="doctor in doctors"
+                        coords="doctor.coords"
+                        options="{
+                            labelContent: (doctor.nbPatient*doctor.averageTime) + ' mn',
+                            labelClass: chooseLabelColor(doctor)
+                        }"
+                        click="clickOnMarker(doctor)"
+                        idkey="$index">
+        </ui-gmap-marker>
+        <!--to add as a map control-->
+        <ui-gmap-search-box options="searchbox.options" template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
+        <!--to add to a parent div-->
+        <!--<ui-gmap-search-box options="searchbox.options" template="searchbox.template"  events="searchbox.events" parentdiv="searchbox.parentdiv"></ui-gmap-search-box>-->
+
+
+        <!--<ui-gmap-markers idkey="map.idkey" models="map.markers" coords="'self'" icon="'icon'" click="'onClicked'"></ui-gmap-markers>-->
+
+
     </ui-gmap-google-map>
 </header>
 
