@@ -25,6 +25,10 @@ angular.module('timerDocFullstackApp', [
       });
   }])
 
+  .run(['$templateCache', function ($templateCache) {
+      $templateCache.put('searchbox.tpl.html', '<input id="pac-input" class="pac-controls" type="text" placeholder="Search Box">');
+  }])
+
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
     return {
       // Add authorization token to headers
