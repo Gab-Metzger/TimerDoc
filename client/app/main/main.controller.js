@@ -27,8 +27,8 @@ angular.module('timerDocFullstackApp')
     GoogleMapApi.then(function(maps) {
         maps.visualRefresh = true;
         $scope.defaultBounds = new google.maps.LatLngBounds(
-            new google.maps.LatLng(40.82148, -73.66450),
-            new google.maps.LatLng(40.66541, -74.31715));
+            new google.maps.LatLng(48.553493, 7.749963),
+            new google.maps.LatLng(48.550886, 7.735511));
 
         $scope.map.bounds = {};
 
@@ -97,14 +97,14 @@ angular.module('timerDocFullstackApp')
 
                     $scope.map.bounds = {
                         northeast: {
-                            latitude: bounds.getNorthEast().lat(),
-                            longitude: bounds.getNorthEast().lng()
+                            latitude: bounds.getNorthEast().lat()+0.0025822,
+                            longitude: bounds.getNorthEast().lng()+0.0187469
                         },
                         southwest: {
-                            latitude: bounds.getSouthWest().lat(),
-                            longitude: bounds.getSouthWest().lng()
+                            latitude: bounds.getSouthWest().lat()-0.0015458,
+                            longitude: bounds.getSouthWest().lng()-0.0063191
                         }
-                    }
+                    };
 
                 }
             }
