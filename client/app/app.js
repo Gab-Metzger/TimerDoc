@@ -17,6 +17,14 @@ angular.module('timerDocFullstackApp', [
     $httpProvider.interceptors.push('authInterceptor');
   })
 
+  .config(['GoogleMapApiProvider'.ns(), function (GoogleMapApi) {
+      GoogleMapApi.configure({
+          //    key: 'your api key',
+          v: '3.17',
+          libraries: 'places'
+      });
+  }])
+
   .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
     return {
       // Add authorization token to headers

@@ -5,7 +5,7 @@ angular.module('timerDocFullstackApp')
 
     $scope.doctor = {};
 
-    Doctor.get().success(function (data,status) {
+    Doctor.get().success(function (data) {
         $scope.doctors = data;
         socket.syncUpdates('doctor', $scope.doctors);
     });
@@ -20,7 +20,7 @@ angular.module('timerDocFullstackApp')
                 console.log(data);
                 $scope.doctor = {};
             });
-    }
+    };
 
     $scope.removeDoctor = Modal.confirm.delete(function(doc) {
         $http.delete('/api/doctors/'+doc._id);
@@ -30,13 +30,13 @@ angular.module('timerDocFullstackApp')
         var count = doctor.nbPatient;
         count = count+1;
         $http.put('/api/doctors/'+doctor._id, {"nbPatient":count});
-    }
+    };
 
     $scope.removePatient = function(doctor) {
         var count = doctor.nbPatient;
         count = count-1;
         $http.put('/api/doctors/'+doctor._id, {"nbPatient":count});
-    }
+    };
 
     $scope.$on('$destroy', function () {
         socket.unsyncUpdates('doctor');
