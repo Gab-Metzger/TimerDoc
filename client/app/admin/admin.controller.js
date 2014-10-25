@@ -14,43 +14,28 @@ angular.module('timerDocFullstackApp')
         $scope.doctor.adminID = Auth.getCurrentUser()._id;
         $scope.doctor.nbPatient = 0;
         $http.post('/api/doctors', $scope.doctor).
-            success(function(data, status, headers, config) {
+            success(function(data) {
                 // this callback will be called asynchronously
                 // when the response is available
                 console.log(data);
                 $scope.doctor = {};
-            }).
-            error(function(data, status, headers, config) {
-                // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                console.log("Error");
-        });
+            });
     }
 
     $scope.removeDoctor = Modal.confirm.delete(function(doc) {
         $http.delete('/api/doctors/'+doc._id);
-
-        /*angular.forEach($scope.doctors, function(u, i) {
-            if (u === doc) {
-                $scope.doctors.splice(i, 1);
-            }
-        });*/
     });
 
     $scope.addPatient = function(doctor) {
         var count = doctor.nbPatient;
         count = count+1;
-        $http.put('/api/doctors/'+doctor._id, {"nbPatient":count}).success(function(data, status) {
-            if(err) return console.log(err);
-        });
+        $http.put('/api/doctors/'+doctor._id, {"nbPatient":count});
     }
 
     $scope.removePatient = function(doctor) {
         var count = doctor.nbPatient;
         count = count-1;
-        $http.put('/api/doctors/'+doctor._id, {"nbPatient":count}).success(function(data, status) {
-            if(err) return console.log(err);
-        });
+        $http.put('/api/doctors/'+doctor._id, {"nbPatient":count});
     }
 
     $scope.$on('$destroy', function () {

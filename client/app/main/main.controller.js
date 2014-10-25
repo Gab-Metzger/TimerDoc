@@ -3,7 +3,7 @@
 angular.module('timerDocFullstackApp')
   .controller('MainCtrl', function ($scope, $http, socket, Doctor) {
 
-    Doctor.get().success(function (data,status) {
+    Doctor.get().success(function (data) {
         $scope.doctors = data;
         socket.syncUpdates('doctor', $scope.doctors);
     });
@@ -46,7 +46,7 @@ angular.module('timerDocFullstackApp')
     };
 
     $scope.clickOnMarker = function(doctor) {
-        $http.get('/api/doctors/'+doctor._id).success(function(data, status) {
+        $http.get('/api/doctors/'+doctor._id).success(function(data) {
             console.log(data);
             $scope.doctorDetail = data;
         });
@@ -78,7 +78,6 @@ angular.module('timerDocFullstackApp')
                     return;
                 }
                 // For each place, get the icon, place name, and location.
-                var newMarkers = [];
                 var bounds = new google.maps.LatLngBounds();
                 for (var i = 0, place; place = places[i]; i++) {
                     // Create a marker for each place.
