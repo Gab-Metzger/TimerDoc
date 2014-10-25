@@ -24,6 +24,28 @@
 
 .angular-google-map-container { height: 400px; }
 
+.marker-labels-green {
+  width: 50px;
+  height: 20px;
+  color: #ffffff;
+  background-color: #228b22;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.marker-labels-red {
+  width: 50px;
+  height: 20px;
+  color: #ffffff;
+  background-color: orangered;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.display-time {
+  font-size: 40px;
+}
+
 .footer {
     text-align: center;
     padding: 30px 0;

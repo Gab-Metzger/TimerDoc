@@ -2,10 +2,30 @@
 
 <header>
     <ui-gmap-google-map center="map.center" zoom="map.zoom">
+        <ui-gmap-marker ng-repeat="doctor in doctors"
+                        coords="doctor.coords"
+                        options="{
+                            labelContent: (doctor.nbPatient*doctor.averageTime) + ' mn',
+                            labelClass: chooseLabelColor(doctor)
+                        }"
+                        click="clickOnMarker(doctor)"
+                        idkey="$index">
+        </ui-gmap-marker>
+        <ui-gmap-search-box template="searchbox.template" position="searchbox.position"></ui-gmap-search-box>
     </ui-gmap-google-map>
 </header>
 
-<div class="container">
+<div class="container" ng-if="doctorDetail">
+    <div class="col-md-offset-4 col-md-4">
+        <div class="display-time">
+            <i class="glyphicon glyphicon-time"> {{doctorDetail.nbPatient * doctorDetail.averageTime}}mn</i>
+        </div>
+        <h3>Doctor {{doctorDetail.lastName}} {{doctorDetail.firstName}}</h3>
+        <p>{{doctorDetail.address}}</p>
+        <p>E-mail: {{doctorDetail.email}}</p>
+        <p>Tel : {{doctorDetail.phone}}</p>
+        <p>Informations : {{doctorDetail.consultation}}</p>
+    </div>
 
 </div>
 
