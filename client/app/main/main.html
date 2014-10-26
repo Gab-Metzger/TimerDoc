@@ -26,7 +26,7 @@
         <ui-gmap-marker ng-repeat="doctor in doctors"
                         coords="doctor.coords"
                         options="{
-                            labelContent: (doctor.nbPatient*doctor.averageTime) + ' mn',
+                            labelContent: (doctor.time),
                             labelClass: chooseLabelColor(doctor)
                         }"
                         click="clickOnMarker(doctor)"

@@ -4,6 +4,14 @@ angular.module('timerDocFullstackApp')
   .controller('MainCtrl', ['$scope', '$http', 'socket', 'Doctor', 'GoogleMapApi'.ns(), function ($scope, $http, socket, Doctor, GoogleMapApi) {
 
     Doctor.get().success(function (data) {
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].close === true) {
+                data[i].time = 'Fermé';
+            }
+            else {
+                data[i].time = (data[i].nbPatient * data[i].averageTime) + ' mn';
+            }
+        }
         $scope.doctors = data;
         socket.syncUpdates('doctor', $scope.doctors);
     });
