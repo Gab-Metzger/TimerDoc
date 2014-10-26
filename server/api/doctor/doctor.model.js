@@ -12,12 +12,12 @@ var DoctorSchema = new Schema({
       latitude: Number,
       longitude: Number
   },
-  email: String,
   phone: String,
   consultation: String,
   nbPatient: Number,
   averageTime: Number,
-  appointment: Boolean
+  appointment: Boolean,
+  close: Boolean
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);

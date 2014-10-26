@@ -41,6 +41,12 @@ angular.module('timerDocFullstackApp')
         $http.put('/api/doctors/'+doctor._id, {"nbPatient":count});
     };
 
+    $scope.closeRoom = function(doctor, close) {
+        $http.put('api/doctors/'+doctor._id, {"close": close}).success(function(data) {
+            console.log(data);
+        });
+    };
+
     $scope.$on('$destroy', function () {
         socket.unsyncUpdates('doctor');
     });

@@ -9,12 +9,19 @@ angular.module('timerDocFullstackApp')
     });
 
     $scope.chooseLabelColor = function(doctor) {
-        if ((doctor.nbPatient * doctor.averageTime) >= 60) {
-            return 'marker-labels-red';
+
+        if(doctor.close) {
+            return 'marker-labels-grey';
         }
         else {
-            return 'marker-labels-green';
+            if ((doctor.nbPatient * doctor.averageTime) >= 60) {
+                return 'marker-labels-red';
+            }
+            else {
+                return 'marker-labels-green';
+            }
         }
+
     };
 
     $scope.clickOnMarker = function(doctor) {
