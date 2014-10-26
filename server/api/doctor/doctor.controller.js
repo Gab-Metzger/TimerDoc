@@ -29,6 +29,15 @@ exports.show = function(req, res) {
   });
 };
 
+// Get all doctor matches with adminID
+exports.admin = function(req, res) {
+    Doctor.find({adminID: req.params.adminid}, function (err, doctors) {
+        if(err) { return handleError(res, err); }
+        if(!doctors) { return res.send(404); }
+        return res.json(doctors);
+    });
+};
+
 // Creates a new doctor in the DB.
 exports.create = function(req, res) {
   Doctor.create(req.body, function(err, doctor) {
