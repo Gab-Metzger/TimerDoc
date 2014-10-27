@@ -16,8 +16,7 @@ var DoctorSchema = new Schema({
   consultation: String,
   nbPatient: Number,
   averageTime: Number,
-  appointment: Boolean,
-  close: Boolean
+  state: String
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);
