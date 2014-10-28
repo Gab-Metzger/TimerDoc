@@ -12,6 +12,7 @@
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
         <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
+        <li ng-show="isUser()" ng-class="{active: isActive('/user')}"><a href="/user">Panel</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

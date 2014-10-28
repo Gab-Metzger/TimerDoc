@@ -17,9 +17,10 @@
                     <td>{{doc.nbPatient}} <button class="btn btn-default" ng-click="addPatient(doc)"><i class="glyphicon glyphicon-plus"></i></button><button class="btn btn-default" ng-click="removePatient(doc)"><i class="glyphicon glyphicon-minus"></i></button></td>
                     <td>
                         <div class="btn-group">
-                            <label class="btn btn-primary" ng-model="radioModel" btn-radio="'appointment'">Rendez-vous</label>
-                            <label class="btn btn-primary" ng-model="radioModel" btn-radio="'close'">Fermé</label>
+                            <label class="btn btn-primary" ng-model="radioModel" btn-radio="'appointment'" ng-change="updateState(doc,radioModel)">Rendez-vous</label>
+                            <label class="btn btn-primary" ng-model="radioModel" btn-radio="'close'" ng-change="updateState(doc,radioModel)">Fermé</label>
                         </div>
+                        <span>{{doc.state}}</span>
                     </td>
                     <td><button class="btn btn-default" ng-click="removeDoctor(doc.lastName,doc)"><i class="glyphicon glyphicon-trash"></i></button></td>
                 </tr>
