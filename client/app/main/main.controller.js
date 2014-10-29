@@ -5,8 +5,11 @@ angular.module('timerDocFullstackApp')
 
     Doctor.get().success(function (data) {
         for (var i = 0; i < data.length; i++) {
-            if (data[i].close === true) {
+            if (data[i].state === 'close') {
                 data[i].time = 'Fermé';
+            }
+            else if (data[i].state === 'appointment') {
+                data[i].time = 'RdV';
             }
             else {
                 data[i].time = (data[i].nbPatient * data[i].averageTime) + ' mn';
@@ -18,7 +21,7 @@ angular.module('timerDocFullstackApp')
 
     $scope.chooseLabelColor = function(doctor) {
 
-        if(doctor.close) {
+        if(doctor.state === 'close' || doctor.state === 'appointment') {
             return 'marker-labels-grey';
         }
         else {
@@ -34,8 +37,11 @@ angular.module('timerDocFullstackApp')
 
     $scope.clickOnMarker = function(doctor) {
         $http.get('/api/doctors/'+doctor._id).success(function(data) {
-            if (data.close === true) {
+            if (data.state === 'close') {
                 data.time = 'Fermé';
+            }
+            else if (data.state === 'appointment') {
+                data.time = 'RdV';
             }
             else {
                 data.time = (data.nbPatient * data.averageTime) + ' mn';

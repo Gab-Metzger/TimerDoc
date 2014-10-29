@@ -16,11 +16,16 @@
                     <td>{{doc.address}}</td>
                     <td>{{doc.nbPatient}} <button class="btn btn-default" ng-click="addPatient(doc)"><i class="glyphicon glyphicon-plus"></i></button><button class="btn btn-default" ng-click="removePatient(doc)"><i class="glyphicon glyphicon-minus"></i></button></td>
                     <td>
+                        <div ng-switch="doc.state">
+                            <span ng-switch-when="close">Fermé</span>
+                            <span ng-switch-when="appointment">Rendez-Vous</span>
+                            <span ng-switch-default>Consultation</span>
+                        </div>
                         <div class="btn-group">
                             <label class="btn btn-primary" ng-model="radioModel" btn-radio="'appointment'" ng-change="updateState(doc,radioModel)">Rendez-vous</label>
                             <label class="btn btn-primary" ng-model="radioModel" btn-radio="'close'" ng-change="updateState(doc,radioModel)">Fermé</label>
+                            <label class="btn btn-primary" ng-model="radioModel" btn-radio="'open'" ng-change="updateState(doc,radioModel)">Consultation</label>
                         </div>
-                        <span>{{doc.state}}</span>
                     </td>
                     <td><button class="btn btn-default" ng-click="removeDoctor(doc.lastName,doc)"><i class="glyphicon glyphicon-trash"></i></button></td>
                 </tr>
@@ -44,9 +49,3 @@
         </div>
     </section>
 </div>
-
-<footer class="footer">
-    <div class="container">
-        <p>Timerdoc all rights reserved</p>
-    </div>
-</footer>
