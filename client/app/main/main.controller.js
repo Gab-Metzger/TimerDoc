@@ -21,8 +21,11 @@ angular.module('timerDocFullstackApp')
 
     $scope.chooseLabelColor = function(doctor) {
 
-        if(doctor.state === 'close' || doctor.state === 'appointment') {
+        if(doctor.state === 'close') {
             return 'marker-labels-grey';
+        }
+        else if (doctor.state === 'appointment') {
+            return 'marker-labels-blue';
         }
         else {
             if ((doctor.nbPatient * doctor.averageTime) >= 60) {
