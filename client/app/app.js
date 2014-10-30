@@ -7,7 +7,8 @@ angular.module('timerDocFullstackApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'google-maps'.ns()
+  'google-maps'.ns(),
+  'geolocation'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

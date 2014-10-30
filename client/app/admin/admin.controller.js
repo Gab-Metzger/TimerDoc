@@ -1,13 +1,13 @@
 'use strict';
 
 angular.module('timerDocFullstackApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User, Doctor, Modal, socket) {
+  .controller('AdminCtrl', ['$scope', '$http', 'Auth', 'User', 'Doctor', 'Modal', 'socket', 'GoogleMapApi'.ns(), function ($scope, $http, Auth, User, Doctor, Modal, socket, GoogleMapApi) {
 
     $scope.doctor = {};
 
-    var adminId = Auth.getCurrentUser()._id;
+    //var adminId = Auth.getCurrentUser()._id;
 
-    $http.get('api/doctors/admin/'+adminId).success(function (data) {
+    $http.get('api/doctors/admin/'+Auth.getCurrentUser()._id).success(function (data) {
         $scope.doctors = data;
         console.log(data);
         socket.syncUpdates('doctor', $scope.doctors);
@@ -16,13 +16,24 @@ angular.module('timerDocFullstackApp')
     $scope.addDoctor = function() {
         $scope.doctor.adminID = Auth.getCurrentUser()._id;
         $scope.doctor.nbPatient = 0;
-        $http.post('/api/doctors', $scope.doctor).
-            success(function(data) {
-                // this callback will be called asynchronously
-                // when the response is available
-                console.log(data);
-                $scope.doctor = {};
+        $scope.doctor.state = 'open';
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode( { 'address': $scope.doctor.address}, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                $scope.doctor.coords = {
+                    latitude: results[0].geometry.location.k,
+                    longitude: results[0].geometry.location.B
+                };
+            } else {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
+            $http.post('/api/doctors', $scope.doctor).
+                success(function(data) {
+                    $scope.doctor = {};
+                    $scope.section1 = false;
             });
+        });
+
     };
 
     $scope.removeDoctor = Modal.confirm.delete(function(doc) {
@@ -41,8 +52,8 @@ angular.module('timerDocFullstackApp')
         $http.put('/api/doctors/'+doctor._id, {"nbPatient":count});
     };
 
-    $scope.closeRoom = function(doctor, close) {
-        $http.put('api/doctors/'+doctor._id, {"close": close}).success(function(data) {
+    $scope.updateState = function(doctor, value) {
+        $http.put('/api/doctors/'+doctor._id, {"state":value}).success(function(data) {
             console.log(data);
         });
     };
@@ -50,4 +61,4 @@ angular.module('timerDocFullstackApp')
     $scope.$on('$destroy', function () {
         socket.unsyncUpdates('doctor');
     });
-  });
+  }]);

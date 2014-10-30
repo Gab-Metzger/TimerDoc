@@ -15,10 +15,19 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
     padding: 0.2em 0;
 }
 
+.navbar-brand {
+  float: left;
+  padding: 17px 15px;
+  font-size: 18px;
+  line-height: 20px;
+  height: 70px;
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
 @import 'admin/admin.scss';
 @import 'main/main.scss';
+@import 'user/user.scss';
 @import 'modal/modal.scss';
 // endinjector

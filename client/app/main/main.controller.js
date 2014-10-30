@@ -1,12 +1,15 @@
 'use strict';
 
 angular.module('timerDocFullstackApp')
-  .controller('MainCtrl', ['$scope', '$http', 'socket', 'Doctor', 'GoogleMapApi'.ns(), function ($scope, $http, socket, Doctor, GoogleMapApi) {
+  .controller('MainCtrl', ['$scope', '$http', 'socket', 'Doctor', 'GoogleMapApi'.ns(), 'geolocation', function ($scope, $http, socket, Doctor, GoogleMapApi, geolocation) {
 
     Doctor.get().success(function (data) {
         for (var i = 0; i < data.length; i++) {
-            if (data[i].close === true) {
+            if (data[i].state === 'close') {
                 data[i].time = 'Fermé';
+            }
+            else if (data[i].state === 'appointment') {
+                data[i].time = 'RdV';
             }
             else {
                 data[i].time = (data[i].nbPatient * data[i].averageTime) + ' mn';
@@ -18,8 +21,11 @@ angular.module('timerDocFullstackApp')
 
     $scope.chooseLabelColor = function(doctor) {
 
-        if(doctor.close) {
+        if(doctor.state === 'close') {
             return 'marker-labels-grey';
+        }
+        else if (doctor.state === 'appointment') {
+            return 'marker-labels-blue';
         }
         else {
             if ((doctor.nbPatient * doctor.averageTime) >= 60) {
@@ -34,8 +40,11 @@ angular.module('timerDocFullstackApp')
 
     $scope.clickOnMarker = function(doctor) {
         $http.get('/api/doctors/'+doctor._id).success(function(data) {
-            if (data.close === true) {
+            if (data.state === 'close') {
                 data.time = 'Fermé';
+            }
+            else if (data.state === 'appointment') {
+                data.time = 'RdV';
             }
             else {
                 data.time = (data.nbPatient * data.averageTime) + ' mn';

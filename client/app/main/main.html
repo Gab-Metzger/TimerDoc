@@ -46,19 +46,17 @@
 
 <div class="container" ng-if="doctorDetail">
     <div class="col-md-offset-4 col-md-4">
-        <div class="display-time">
-            <i class="glyphicon glyphicon-time"> {{doctorDetail.time}}</i>
+        <div class="doctor-infos">
+            <div class="display-time">
+                <i class="glyphicon glyphicon-time"></i>
+                <br />
+                <span>{{doctorDetail.time}}</span>
+            </div>
+            <h3>Docteur {{doctorDetail.lastName}} {{doctorDetail.firstName}}</h3>
+            <p>{{doctorDetail.address}}</p>
+            <p><strong>Tel :</strong> {{doctorDetail.phone}}</p>
+            <strong>Informations : </strong>
+            <p>{{doctorDetail.consultation}}</p>
         </div>
-        <h3>Doctor {{doctorDetail.lastName}} {{doctorDetail.firstName}}</h3>
-        <p>{{doctorDetail.address}}</p>
-        <p>Tel : {{doctorDetail.phone}}</p>
-        <p>Informations : {{doctorDetail.consultation}}</p>
     </div>
-
 </div>
-
-<footer class="footer">
-  <div class="container">
-      <p>Timerdoc all rights reserved</p>
-  </div>
-</footer>

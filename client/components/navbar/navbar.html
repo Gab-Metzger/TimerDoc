@@ -7,14 +7,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="/" class="navbar-brand">TimerDoc</a>
+      <a href="/" class="navbar-brand">TIMERDOC <img src="assets/images/logo.png" alt="logo" height="40" width="40"/></a>
     </div>
     <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
-        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
+        <li><a>Trouvez un médecin disponible près de chez vous.</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+          <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
+          <li ng-show="isUser()" ng-class="{active: isActive('/user')}"><a href="/user">Panel</a></li>
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
         <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
