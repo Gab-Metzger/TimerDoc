@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('timerDocFullstackApp')
-  .controller('MainCtrl', ['$scope', '$http', 'socket', 'Doctor', 'GoogleMapApi'.ns(), function ($scope, $http, socket, Doctor, GoogleMapApi) {
+  .controller('MainCtrl', ['$scope', '$http', 'socket', 'Doctor', 'GoogleMapApi'.ns(), 'geolocation', function ($scope, $http, socket, Doctor, GoogleMapApi, geolocation) {
 
     Doctor.get().success(function (data) {
         for (var i = 0; i < data.length; i++) {
