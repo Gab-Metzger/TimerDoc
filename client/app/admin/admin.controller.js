@@ -29,7 +29,7 @@ angular.module('timerDocFullstackApp')
             }
             for(var i= 0; i < $scope.doctors.length; i++) {
                 if ($scope.doctors[i].address === $scope.doctor.address) {
-                    $scope.doctor.coords.longitude += 0.0001;
+                    $scope.doctor.coords.latitude += 0.0001;
                 }
             }
             $http.post('/api/doctors', $scope.doctor).
