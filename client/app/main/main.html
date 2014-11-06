@@ -54,9 +54,12 @@
             </div>
             <h3>Docteur {{doctorDetail.lastName}} {{doctorDetail.firstName}}</h3>
             <p>{{doctorDetail.address}}</p>
+            <p ng-bind-html="doctorDetail.activities | breakFilter"></p>
             <p><strong>Tel :</strong> {{doctorDetail.phone}}</p>
-            <strong>Informations : </strong>
-            <p>{{doctorDetail.consultation}}</p>
+            <strong>Horaires de consultations libres : </strong>
+            <p ng-bind-html="doctorDetail.consultation | breakFilter"></p>
+            <strong>Horaires de consultations sur RDV : </strong>
+            <p ng-bind-html="doctorDetail.meetings | breakFilter"></p>
         </div>
     </div>
 </div>
