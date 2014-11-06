@@ -73,6 +73,15 @@ angular.module('timerDocFullstackApp')
             }
         };
 
+        geolocation.getLocation().then(function(data){
+            console.log(data);
+            $scope.map.center = {latitude:data.coords.latitude, longitude:data.coords.longitude};
+            $scope.map.zoom = 14;
+        }, function() {
+            $scope.map.center = {latitude:46.71109, longitude:1.7191036};
+            $scope.map.zoom = 5;
+        });
+
         $scope.searchbox.options.bounds = {};
         $scope.searchbox.options.bounds = new google.maps.LatLngBounds($scope.defaultBounds.getNorthEast(), $scope.defaultBounds.getSouthWest());
     });
@@ -87,11 +96,6 @@ angular.module('timerDocFullstackApp')
         },
         map: {
             control: {},
-            center: {
-                latitude: 48.5691135,
-                longitude: 7.7620942
-            },
-            zoom: 14,
             dragging: false,
             bounds: {},
             idkey: 'place_id',

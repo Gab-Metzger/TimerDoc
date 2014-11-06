@@ -9,7 +9,6 @@ angular.module('timerDocFullstackApp')
 
     $http.get('api/doctors/admin/'+Auth.getCurrentUser()._id).success(function (data) {
         $scope.doctors = data;
-        console.log(data);
         socket.syncUpdates('doctor', $scope.doctors);
     });
 
@@ -17,6 +16,7 @@ angular.module('timerDocFullstackApp')
         $scope.doctor.adminID = Auth.getCurrentUser()._id;
         $scope.doctor.nbPatient = 0;
         $scope.doctor.state = 'open';
+
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode( { 'address': $scope.doctor.address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
@@ -27,8 +27,14 @@ angular.module('timerDocFullstackApp')
             } else {
                 alert('Geocode was not successful for the following reason: ' + status);
             }
+            for(var i= 0; i < $scope.doctors.length; i++) {
+                if ($scope.doctors[i].address === $scope.doctor.address) {
+                    $scope.doctor.coords.latitude += 0.0001;
+                }
+            }
             $http.post('/api/doctors', $scope.doctor).
                 success(function(data) {
+
                     $scope.doctor = {};
                     $scope.section1 = false;
             });
