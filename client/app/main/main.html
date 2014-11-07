@@ -60,6 +60,9 @@
             <p ng-bind-html="doctorDetail.consultation | breakFilter"></p>
             <strong>Horaires de consultations sur RDV : </strong>
             <p ng-bind-html="doctorDetail.meetings | breakFilter"></p>
+            <div ng-if="doctorDetail.url">
+                <a ng-href="{{doctorDetail.url}}" class="btn btn-default btn-lg" role="button" target="_blank">Prendre rendez-vous</a>
+            </div>
         </div>
     </div>
 </div>
