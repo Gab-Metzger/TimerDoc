@@ -48,5 +48,9 @@
         <label for="InputAverageTime">Average Time for one consultation</label>
         <input type="number" class="form-control" ng-model="doctor.averageTime" id="InputAverageTime" placeholder="Enter time (minutes)">
     </div>
+    <div class="form-group">
+        <label for="InputNotes">Notes</label>
+        <textarea class="form-control" id="InputNotes" ng-model="doctor.notes" rows="4"></textarea>
+    </div>
     <button type="submit" ng-click="addDoctor()" class="btn btn-default">Submit</button>
 </form>
