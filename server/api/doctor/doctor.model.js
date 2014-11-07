@@ -19,7 +19,8 @@ var DoctorSchema = new Schema({
   nbPatient: Number,
   averageTime: Number,
   state: String,
-  url: String
+  url: String,
+  infos: String
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);
