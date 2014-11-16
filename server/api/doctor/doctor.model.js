@@ -13,10 +13,15 @@ var DoctorSchema = new Schema({
       longitude: Number
   },
   phone: String,
+  activities: String,
   consultation: String,
+  meetings: String,
   nbPatient: Number,
   averageTime: Number,
-  state: String
+  state: String,
+  url: String,
+  infos: String,
+  notes: String
 });
 
 module.exports = mongoose.model('Doctor', DoctorSchema);

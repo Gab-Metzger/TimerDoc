@@ -54,9 +54,27 @@
             </div>
             <h3>Docteur {{doctorDetail.lastName}} {{doctorDetail.firstName}}</h3>
             <p>{{doctorDetail.address}}</p>
-            <p><strong>Tel :</strong> {{doctorDetail.phone}}</p>
-            <strong>Informations : </strong>
-            <p>{{doctorDetail.consultation}}</p>
+            <p ng-bind-html="doctorDetail.activities | breakFilter"></p>
+            <div ng-if="doctorDetail.phone" class="hidden-xs">
+                <p><strong>Tel :</strong> {{doctorDetail.phone}}</p>
+            </div>
+            <div ng-if="doctorDetail.phone" class="visible-xs">
+                <p><i class="fa fa-phone fa-2x"></i><a ng-href="tel:{{doctorDetail.phone}}"> Appeler</a></p>
+            </div>
+            <strong ng-if="doctorDetail.consultation">Horaires de consultations libres : </strong>
+            <p ng-bind-html="doctorDetail.consultation | breakFilter"></p>
+            <strong ng-if="doctorDetail.meetings">Horaires de consultations sur RDV : </strong>
+            <p ng-bind-html="doctorDetail.meetings | breakFilter"></p>
+            <p ng-bind-html="doctorDetail.notes | breakFilter"></p>
+
+        </div>
+        <br />
+        <div ng-if="doctorDetail.url">
+            <a ng-href="http://{{doctorDetail.url}}" class="btn btn-primary btn-lg button-rdv" role="button" target="_blank">Prendre rendez-vous</a>
+        </div>
+        <br />
+        <div ng-if="doctorDetail.infos">
+            <a ng-href="http://{{doctorDetail.infos}}" class="btn btn-primary btn-lg button-rdv" role="button" target="_blank">En savoir plus</a>
         </div>
     </div>
 </div>
