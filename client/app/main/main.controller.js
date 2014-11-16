@@ -53,6 +53,7 @@ angular.module('timerDocFullstackApp')
         });
     };
 
+
     GoogleMapApi.then(function(maps) {
         maps.visualRefresh = true;
         $scope.defaultBounds = new google.maps.LatLngBounds(
@@ -74,7 +75,6 @@ angular.module('timerDocFullstackApp')
         };
 
         geolocation.getLocation().then(function(data){
-            console.log(data);
             $scope.map.center = {latitude:data.coords.latitude, longitude:data.coords.longitude};
             $scope.map.zoom = 14;
         }, function() {
@@ -107,6 +107,7 @@ angular.module('timerDocFullstackApp')
                     var sw = bounds.getSouthWest(); // LatLng of the south-west corder
                     //console.log("sw bounds " + sw.lat() + ", " + sw.lng());
                 }
+
             }
         },
         searchbox: {
