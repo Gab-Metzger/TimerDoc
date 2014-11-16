@@ -55,7 +55,12 @@
             <h3>Docteur {{doctorDetail.lastName}} {{doctorDetail.firstName}}</h3>
             <p>{{doctorDetail.address}}</p>
             <p ng-bind-html="doctorDetail.activities | breakFilter"></p>
-            <p><strong ng-if="doctorDetail.phone">Tel :</strong> {{doctorDetail.phone}}</p>
+            <div ng-if="doctorDetail.phone" class="hidden-xs">
+                <p><strong>Tel :</strong> {{doctorDetail.phone}}</p>
+            </div>
+            <div ng-if="doctorDetail.phone" class="visible-xs">
+                <p><i class="fa fa-phone fa-2x"></i><a ng-href="tel:{{doctorDetail.phone}}"> Appeler</a></p>
+            </div>
             <strong ng-if="doctorDetail.consultation">Horaires de consultations libres : </strong>
             <p ng-bind-html="doctorDetail.consultation | breakFilter"></p>
             <strong ng-if="doctorDetail.meetings">Horaires de consultations sur RDV : </strong>
