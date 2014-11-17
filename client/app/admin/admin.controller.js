@@ -9,7 +9,7 @@ angular.module('timerDocFullstackApp')
 
     $http.get('api/doctors/admin/'+Auth.getCurrentUser()._id).success(function (data) {
         $scope.doctors = data;
-        socket.syncUpdates('doctor', $scope.doctors);
+        socket.syncUpdates('doctor', data);
     });
 
     $scope.addDoctor = function() {
