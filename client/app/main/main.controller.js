@@ -43,11 +43,14 @@ angular.module('timerDocFullstackApp')
 
     $scope.clickOnMarker = function(doctor) {
         $http.get('/api/doctors/'+doctor._id).success(function(data) {
-            if (data.state === 'close' || data.state === 'nothing') {
+            if (data.state === 'close') {
                 data.time = 'Fermé';
             }
             else if (data.state === 'appointment') {
                 data.time = 'RdV';
+            }
+            else if (data.state === 'nothing') {
+                data.time = 'N/R';
             }
             else {
                 data.time = (data.nbPatient * data.averageTime) + ' mn';
