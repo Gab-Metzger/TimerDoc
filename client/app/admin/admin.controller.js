@@ -6,7 +6,6 @@ angular.module('timerDocFullstackApp')
         $scope.doctor = {};
 
         //var adminId = Auth.getCurrentUser()._id;
-
         $http.get('api/doctors/admin/'+Auth.getCurrentUser()._id).success(function (data) {
             $scope.doctors = data;
             socket.syncUpdates('doctor', $scope.doctors);
