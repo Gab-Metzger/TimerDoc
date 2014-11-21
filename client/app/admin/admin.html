@@ -25,6 +25,7 @@
                             <label class="btn btn-primary" ng-model="radioModel" btn-radio="'appointment'" ng-change="updateState(doc,radioModel)">Rendez-vous</label>
                             <label class="btn btn-primary" ng-model="radioModel" btn-radio="'close'" ng-change="updateState(doc,radioModel)">Fermé</label>
                             <label class="btn btn-primary" ng-model="radioModel" btn-radio="'open'" ng-change="updateState(doc,radioModel)">Consultation</label>
+                            <label class="btn btn-primary" ng-model="radioModel" btn-radio="'nothing'" ng-change="updateState(doc,radioModel)">Non renseigné</label>
                         </div>
                     </td>
                     <td><button class="btn btn-default" ng-click="removeDoctor(doc.lastName,doc)"><i class="glyphicon glyphicon-trash"></i></button></td>

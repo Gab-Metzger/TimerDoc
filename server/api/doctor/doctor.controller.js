@@ -40,10 +40,10 @@ exports.admin = function(req, res) {
 
 // Creates a new doctor in the DB.
 exports.create = function(req, res) {
-  Doctor.create(req.body, function(err, doctor) {
-    if(err) { return handleError(res, err); }
-    return res.json(201, doctor);
-  });
+    Doctor.create(req.body, function(err, doctor) {
+        if(err) { return handleError(res, err); }
+        return res.json(201, doctor);
+    });
 };
 
 // Updates an existing doctor in the DB.

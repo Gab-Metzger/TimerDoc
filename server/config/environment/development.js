@@ -8,5 +8,5 @@ module.exports = {
     uri: 'mongodb://localhost/timerdocfullstack-dev'
   },
 
-  seedDB: true
+  seedDB: false
 };
