@@ -1,80 +1,60 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <header>
-    <!--<ui-gmap-google-map center="map.center" zoom="map.zoom">
-        <ui-gmap-marker ng-repeat="doctor in doctors"
-                        coords="doctor.coords"
-                        options="{
-                            labelContent: (doctor.nbPatient*doctor.averageTime) + ' mn',
-                            labelClass: chooseLabelColor(doctor)
-                        }"
-                        click="clickOnMarker(doctor)"
-                        idkey="$index">
-        </ui-gmap-marker>
-        <ui-gmap-search-box options="searchbox.options" template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
-    </ui-gmap-google-map>-->
     <ui-gmap-google-map
-            center="map.center"
-            zoom="map.zoom"
-            dragging="map.dragging"
-            bounds="map.bounds"
-            events="map.events"
-            options="map.options"
+            center="vm.map.center"
+            zoom="vm.map.zoom"
+            dragging="vm.map.dragging"
+            bounds="vm.map.bounds"
+            events="vm.map.events"
+            options="vm.map.options"
             pan="true"
-            control="map.control"
+            control="vm.map.control"
             >
-        <ui-gmap-marker ng-repeat="doctor in doctors"
+        <ui-gmap-marker ng-repeat="doctor in vm.doctors"
                         coords="doctor.coords"
                         options="{
-                            labelContent: (doctor.time),
-                            labelClass: chooseLabelColor(doctor)
+                            labelContent: doctor.style.label,
+                            labelClass: doctor.style.color
                         }"
-                        click="clickOnMarker(doctor)"
+                        click="vm.clickOnMarker(doctor)"
                         idkey="$index">
         </ui-gmap-marker>
-        <!--to add as a map control-->
-        <ui-gmap-search-box options="searchbox.options" template="searchbox.template" events="searchbox.events"></ui-gmap-search-box>
-        <!--to add to a parent div-->
-        <!--<ui-gmap-search-box options="searchbox.options" template="searchbox.template"  events="searchbox.events" parentdiv="searchbox.parentdiv"></ui-gmap-search-box>-->
-
-
-        <!--<ui-gmap-markers idkey="map.idkey" models="map.markers" coords="'self'" icon="'icon'" click="'onClicked'"></ui-gmap-markers>-->
-
-
+        <ui-gmap-search-box options="vm.searchbox.options" template="vm.searchbox.template" events="vm.searchbox.events"></ui-gmap-search-box>
     </ui-gmap-google-map>
 </header>
 
-<div class="container" ng-if="doctorDetail">
+<div class="container" ng-if="vm.doctorDetail">
     <div class="col-md-offset-4 col-md-4">
         <div class="doctor-infos">
             <div class="display-time">
                 <i class="glyphicon glyphicon-time"></i>
                 <br />
-                <span>{{doctorDetail.time}}</span>
+                <span>{{vm.doctorDetail.style.label}}</span>
             </div>
-            <h3>Docteur {{doctorDetail.lastName}} {{doctorDetail.firstName}}</h3>
-            <p>{{doctorDetail.address}}</p>
-            <p ng-bind-html="doctorDetail.activities | breakFilter"></p>
-            <div ng-if="doctorDetail.phone" class="hidden-xs">
-                <p><strong>Tel :</strong> {{doctorDetail.phone}}</p>
+            <h3>Docteur {{vm.doctorDetail.lastName}} {{vm.doctorDetail.firstName}}</h3>
+            <p>{{vm.doctorDetail.address}}</p>
+            <p ng-bind-html="vm.doctorDetail.activities | breakFilter"></p>
+            <div ng-if="vm.doctorDetail.phone" class="hidden-xs">
+                <p><strong>Tel :</strong> {{vm.doctorDetail.phone}}</p>
             </div>
-            <div ng-if="doctorDetail.phone" class="visible-xs">
-                <p><i class="fa fa-phone fa-2x"></i><a ng-href="tel:{{doctorDetail.phone}}"> Appeler</a></p>
+            <div ng-if="vm.doctorDetail.phone" class="visible-xs">
+                <p><i class="fa fa-phone fa-2x"></i><a ng-href="tel:{{vm.doctorDetail.phone}}"> Appeler</a></p>
             </div>
-            <strong ng-if="doctorDetail.consultation">Horaires de consultations libres : </strong>
-            <p ng-bind-html="doctorDetail.consultation | breakFilter"></p>
-            <strong ng-if="doctorDetail.meetings">Horaires de consultations sur RDV : </strong>
-            <p ng-bind-html="doctorDetail.meetings | breakFilter"></p>
-            <p ng-bind-html="doctorDetail.notes | breakFilter"></p>
+            <strong ng-if="vm.doctorDetail.consultation">Horaires de consultations libres : </strong>
+            <p ng-bind-html="vm.doctorDetail.consultation | breakFilter"></p>
+            <strong ng-if="vm.doctorDetail.meetings">Horaires de consultations sur RDV : </strong>
+            <p ng-bind-html="vm.doctorDetail.meetings | breakFilter"></p>
+            <p ng-bind-html="vm.doctorDetail.notes | breakFilter"></p>
 
         </div>
         <br />
-        <div ng-if="doctorDetail.url">
-            <a ng-href="http://{{doctorDetail.url}}" class="btn btn-primary btn-lg button-rdv" role="button" target="_blank">Prendre rendez-vous</a>
+        <div ng-if="vm.doctorDetail.url">
+            <a ng-href="http://{{vm.doctorDetail.url}}" class="btn btn-primary btn-lg button-rdv" role="button" target="_blank">Prendre rendez-vous</a>
         </div>
         <br />
-        <div ng-if="doctorDetail.infos">
-            <a ng-href="http://{{doctorDetail.infos}}" class="btn btn-primary btn-lg button-rdv" role="button" target="_blank">En savoir plus</a>
+        <div ng-if="vm.doctorDetail.infos">
+            <a ng-href="http://{{vm.doctorDetail.infos}}" class="btn btn-primary btn-lg button-rdv" role="button" target="_blank">En savoir plus</a>
         </div>
     </div>
 </div>
