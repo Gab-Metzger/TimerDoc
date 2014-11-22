@@ -1,26 +1,39 @@
 'use strict';
 
 angular.module('timerDocFullstackApp')
-  .controller('MainCtrl', ['$scope', '$http', 'socket', 'Doctor', 'GoogleMapApi'.ns(), 'geolocation', function ($scope, $http, socket, Doctor, GoogleMapApi, geolocation) {
+  .controller('MainCtrl', ['$scope', '$http', 'socket', 'GoogleMapApi'.ns(), 'geolocation', 'doctorService', function ($scope, $http, socket, GoogleMapApi, geolocation, doctorService) {
 
-    Doctor.get().success(function (data) {
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].state === 'close') {
-                data[i].time = 'Fermé';
-            }
-            else if (data[i].state === 'appointment') {
-                data[i].time = 'RdV';
-            }
-            else if (data[i].state === 'nothing') {
-                data[i].time = 'N/R';
-            }
-            else {
-                data[i].time = (data[i].nbPatient * data[i].averageTime) + ' mn';
-            }
-        }
-        $scope.doctors = data;
-        socket.syncUpdates('doctor', $scope.doctors);
-    });
+  activate();
+
+  function activate() {
+      return getDoctors().then(function() {
+          console.log('Activated Main View');
+      });
+  }
+
+  function getDoctors() {
+      return doctorService.getDoctors()
+          .then(function(data) {
+              for (var i = 0; i < data.length; i++) {
+                  if (data[i].state === 'close') {
+                      data[i].time = 'Fermé';
+                  }
+                  else if (data[i].state === 'appointment') {
+                      data[i].time = 'RdV';
+                  }
+                  else if (data[i].state === 'nothing') {
+                      data[i].time = 'N/R';
+                  }
+                  else {
+                      data[i].time = (data[i].nbPatient * data[i].averageTime) + ' mn';
+                  }
+              }
+              $scope.doctors = data;
+              return $scope.doctors;
+          });
+  }
+
+    socket.syncUpdates('doctor', $scope.doctors);
 
     $scope.chooseLabelColor = function(doctor) {
 

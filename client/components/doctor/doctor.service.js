@@ -1,21 +1,32 @@
 /**
  * Created by gabrielmetzger on 23/10/14.
  */
-angular.module('timerDocFullstackApp').factory('Doctor', ['$http', function($http) {
+angular
+    .module('timerDocFullstackApp')
+    .factory('doctorService', doctorService);
 
+doctorService.$inject = ['$http'];
+
+function doctorService($http) {
     return {
-        // call to get all nerds
-        get : function() {
-            return $http.get('/api/doctors');
-        },
+        getDoctors: getDoctors
+    };
 
-        create : function(doctorData) {
-            return $http.post('/api/doctors/', doctorData);
-        },
+    function getDoctors() {
+        return $http.get('/api/doctors')
+            .then(getDoctorsComplete)
+            .catch(getDoctorsFailed);
 
-        delete : function(id) {
-            return $http.delete('/api/doctors/' + id);
+        function getDoctorsComplete(response) {
+            return response.data;
+        }
+
+        function getDoctorsFailed(error) {
+            console.log('XHR Failed for getAvengers.' + error.data);
         }
     }
+}
 
-}]);
+
+
+
