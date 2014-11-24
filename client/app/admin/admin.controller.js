@@ -1,69 +1,88 @@
-'use strict';
+(function(){
+    'use strict';
 
-angular.module('timerDocFullstackApp')
-    .controller('AdminCtrl', ['$scope', '$http', 'Auth', 'User', 'Doctor', 'Modal', 'socket', 'GoogleMapApi'.ns(), function ($scope, $http, Auth, User, Doctor, Modal, socket, GoogleMapApi) {
+    angular
+        .module('timerDocFullstackApp')
+        .controller('AdminCtrl', AdminCtrl);
 
-        $scope.doctor = {};
+    AdminCtrl.$inject = ['$http', 'Auth', 'Modal', 'socket', 'GoogleMapApi'.ns(), 'doctorService'];
 
-        //var adminId = Auth.getCurrentUser()._id;
-        $http.get('api/doctors/admin/'+Auth.getCurrentUser()._id).success(function (data) {
-            $scope.doctors = data;
-            socket.syncUpdates('doctor', $scope.doctors);
-        });
+    function AdminCtrl($http, Auth, Modal, socket, GoogleMapApi, doctorService) {
 
-        $scope.addDoctor = function() {
-            $scope.doctor.adminID = Auth.getCurrentUser()._id;
-            $scope.doctor.nbPatient = 0;
-            $scope.doctor.state = 'open';
+        /*jshint validthis: true */
+        var vm = this;
+        vm.doctor = {};
+        vm.addDoctor = addDoctor;
+        vm.addPatient = addPatient;
+        vm.removePatient = removePatient;
+        vm.updateState = updateState;
+
+        activate();
+
+        function activate() {
+            return getAdminDoctors().then(function () {
+                console.log('Activated Admin View');
+            });
+        }
+
+        function getAdminDoctors() {
+            return doctorService.getAdminDoctors()
+                .then(function (data) {
+                    vm.doctors = data;
+                    socket.syncUpdates('doctor', vm.doctors);
+                    return vm.doctors;
+                });
+        }
+
+        function addDoctor() {
+            vm.doctor.adminID = Auth.getCurrentUser()._id;
+            vm.doctor.nbPatient = 0;
+            vm.doctor.state = 'open';
 
             var geocoder = new google.maps.Geocoder();
-            geocoder.geocode( { 'address': $scope.doctor.address}, function(results, status) {
+            geocoder.geocode( { 'address': vm.doctor.address}, function(results, status) {
                 if (status == google.maps.GeocoderStatus.OK) {
-                    $scope.doctor.coords = {
+                    vm.doctor.coords = {
                         latitude: results[0].geometry.location.k,
                         longitude: results[0].geometry.location.B
                     };
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
                 }
-                for(var i= 0; i < $scope.doctors.length; i++) {
-                    if ($scope.doctors[i].address === $scope.doctor.address) {
-                        $scope.doctor.coords.latitude += 0.0001;
+                for(var i= 0; i < vm.doctors.length; i++) {
+                    if (vm.doctors[i].address === vm.doctor.address) {
+                        vm.doctor.coords.latitude += 0.0001;
                     }
                 }
-                $http.post('/api/doctors', $scope.doctor).
+                $http.post('/api/doctors', vm.doctor).
                     success(function(data) {
 
-                        $scope.doctor = {};
-                        $scope.section1 = false;
+                        vm.doctor = {};
+                        vm.section1 = false;
                     });
             });
 
         };
 
-        $scope.removeDoctor = Modal.confirm.delete(function(doc) {
-            $http.delete('/api/doctors/'+doc._id);
+        vm.removeDoctor = Modal.confirm.delete(function(doc) {
+            doctorService.deleteDoctor(doc);
         });
 
-        $scope.addPatient = function(doctor) {
-            var count = doctor.nbPatient;
-            count = count+1;
-            $http.put('/api/doctors/'+doctor._id, {"nbPatient":count});
+        function addPatient(doctor) {
+            doctorService.addPatient(doctor);
         };
 
-        $scope.removePatient = function(doctor) {
-            var count = doctor.nbPatient;
-            count = count-1;
-            $http.put('/api/doctors/'+doctor._id, {"nbPatient":count});
+        function removePatient(doctor) {
+            doctorService.removePatient(doctor);
         };
 
-        $scope.updateState = function(doctor, value) {
-            $http.put('/api/doctors/'+doctor._id, {"state":value}).success(function(data) {
-                console.log(data);
-            });
+        function updateState(doctor, value) {
+            doctorService.updateState(doctor,value);
         };
 
-        $scope.$on('$destroy', function () {
+        /*vm.$on('$destroy', function () {
             socket.unsyncUpdates('doctor');
-        });
-    }]);
+        });*/
+    }
+})();
+

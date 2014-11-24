@@ -1,56 +1,47 @@
 <form role="form">
     <div class="form-group">
         <label for="InputLastName">Last Name</label>
-        <input type="text" class="form-control" ng-model="doctor.lastName" id="InputLastName" placeholder="Enter lastname">
+        <input type="text" class="form-control" ng-model="vm.doctor.lastName" id="InputLastName" placeholder="Enter lastname">
     </div>
     <div class="form-group">
         <label for="InputFirstName">First Name</label>
-        <input type="text" class="form-control" ng-model="doctor.firstName" id="InputFirstName" placeholder="Enter firstname">
+        <input type="text" class="form-control" ng-model="vm.doctor.firstName" id="InputFirstName" placeholder="Enter firstname">
     </div>
     <div class="form-group">
         <label for="InputAddress">Address</label>
-        <input type="text" class="form-control" ng-model="doctor.address" id="InputAddress" placeholder="Enter address">
+        <input type="text" class="form-control" ng-model="vm.doctor.address" id="InputAddress" placeholder="Enter address">
     </div>
     <div class="form-group">
         <label for="InputActivities">Activities</label>
-        <textarea class="form-control" id="InputActivities" ng-model="doctor.activities" rows="3"></textarea>
+        <textarea class="form-control" id="InputActivities" ng-model="vm.doctor.activities" rows="3"></textarea>
     </div>
-    <!--<div class="form-group">
-        <label for="InputLatitude">Latitude</label>
-        <input type="number" step="any" class="form-control" ng-model="doctor.coords.latitude" id="InputLatitude" placeholder="Enter latitude">
-
-    </div>
-    <div class="form-group">
-        <label for="InputLongitude">Longitude</label>
-        <input type="number" step="any" class="form-control" ng-model="doctor.coords.longitude" id="InputLongitude" placeholder="Enter longitude">
-    </div>-->
     <div class="form-group">
         <label for="InputPhone">Phone Number</label>
-        <input type="tel" class="form-control" ng-model="doctor.phone" id="InputPhone" placeholder="Enter phone">
+        <input type="tel" class="form-control" ng-model="vm.doctor.phone" id="InputPhone" placeholder="Enter phone">
     </div>
     <div class="form-group">
         <label for="InputConsultation">Consultation</label>
-        <textarea class="form-control" id="InputConsultation" ng-model="doctor.consultation" rows="6"></textarea>
+        <textarea class="form-control" id="InputConsultation" ng-model="vm.doctor.consultation" rows="6"></textarea>
     </div>
     <div class="form-group">
         <label for="InputMeetings">RdV</label>
-        <textarea class="form-control" id="InputMeetings" ng-model="doctor.meetings" rows="6"></textarea>
+        <textarea class="form-control" id="InputMeetings" ng-model="vm.doctor.meetings" rows="6"></textarea>
     </div>
     <div class="form-group">
         <label for="InputURL">Appointment URL</label>
-        <input type="text" class="form-control" ng-model="doctor.url" id="InputURL" placeholder="Enter url">
+        <input type="text" class="form-control" ng-model="vm.doctor.url" id="InputURL" placeholder="Enter url">
     </div>
     <div class="form-group">
         <label for="InputInfos">More infos URL</label>
-        <input type="text" class="form-control" ng-model="doctor.infos" id="InputInfos" placeholder="Enter url">
+        <input type="text" class="form-control" ng-model="vm.doctor.infos" id="InputInfos" placeholder="Enter url">
     </div>
     <div class="form-group">
         <label for="InputAverageTime">Average Time for one consultation</label>
-        <input type="number" class="form-control" ng-model="doctor.averageTime" id="InputAverageTime" placeholder="Enter time (minutes)">
+        <input type="number" class="form-control" ng-model="vm.doctor.averageTime" id="InputAverageTime" placeholder="Enter time (minutes)">
     </div>
     <div class="form-group">
         <label for="InputNotes">Notes</label>
-        <textarea class="form-control" id="InputNotes" ng-model="doctor.notes" rows="4"></textarea>
+        <textarea class="form-control" id="InputNotes" ng-model="vm.doctor.notes" rows="4"></textarea>
     </div>
-    <button type="submit" ng-click="addDoctor()" class="btn btn-default">Submit</button>
+    <button type="submit" ng-click="vm.addDoctor()" class="btn btn-default">Submit</button>
 </form>

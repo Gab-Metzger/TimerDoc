@@ -19,6 +19,7 @@
         function activate() {
             return getDoctors().then(function () {
                 console.log('Activated Main View');
+                socket.syncUpdates('doctor', vm.doctors);
             });
         }
 
@@ -29,8 +30,6 @@
                     return vm.doctors;
                 });
         }
-
-        socket.syncUpdates('doctor', vm.doctors);
 
         function clickOnMarker(doctor) {
             doctorService.getDoctor(doctor._id).then(function (data) {
