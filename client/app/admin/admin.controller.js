@@ -29,7 +29,7 @@
             return doctorService.getAdminDoctors()
                 .then(function (data) {
                     vm.doctors = data;
-                    socket.syncUpdates('doctor', vm.doctors);
+                    //socket.syncUpdates('doctor', vm.doctors);
                     return vm.doctors;
                 });
         }
@@ -70,10 +70,12 @@
 
         function addPatient(doctor) {
             doctorService.addPatient(doctor);
+            doctor.nbPatient++;
         };
 
         function removePatient(doctor) {
             doctorService.removePatient(doctor);
+            doctor.nbPatient--;
         };
 
         function updateState(doctor, value) {
