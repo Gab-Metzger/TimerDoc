@@ -10,7 +10,7 @@
     function UserCtrl(socket, Auth) {
         var vm = this;
 
-        vm.username = Auth.getCurrentUser().name;
+        vm.username = Auth.getCurrentUser().firstname + " " + Auth.getCurrentUser().lastname;
     }
 })();
 

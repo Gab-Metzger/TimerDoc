@@ -5,9 +5,9 @@
         .module('timerDocFullstackApp')
         .controller('AdminCtrl', AdminCtrl);
 
-    AdminCtrl.$inject = ['$http', 'Auth', 'Modal', 'socket', 'GoogleMapApi'.ns(), 'doctorService'];
+    AdminCtrl.$inject = ['$http', 'Auth', 'Modal', 'GoogleMapApi'.ns(), 'doctorService'];
 
-    function AdminCtrl($http, Auth, Modal, socket, GoogleMapApi, doctorService) {
+    function AdminCtrl($http, Auth, Modal, GoogleMapApi, doctorService) {
 
         /*jshint validthis: true */
         var vm = this;
@@ -29,7 +29,6 @@
             return doctorService.getAdminDoctors()
                 .then(function (data) {
                     vm.doctors = data;
-                    //socket.syncUpdates('doctor', vm.doctors);
                     return vm.doctors;
                 });
         }
@@ -56,7 +55,7 @@
                 }
                 $http.post('/api/doctors', vm.doctor).
                     success(function(data) {
-
+                        vm.doctors.push(data);
                         vm.doctor = {};
                         vm.section1 = false;
                     });
@@ -66,6 +65,7 @@
 
         vm.removeDoctor = Modal.confirm.delete(function(doc) {
             doctorService.deleteDoctor(doc);
+            vm.doctors.splice(doc,1);
         });
 
         function addPatient(doctor) {
@@ -80,11 +80,8 @@
 
         function updateState(doctor, value) {
             doctorService.updateState(doctor,value);
+            doctor.state = value;
         };
-
-        /*vm.$on('$destroy', function () {
-            socket.unsyncUpdates('doctor');
-        });*/
     }
 })();
 
