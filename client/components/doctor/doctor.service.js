@@ -10,6 +10,7 @@ doctorService.$inject = ['$http','Auth'];
 function doctorService($http, Auth) {
     return {
         getDoctors: getDoctors,
+        getDoctorNames: getDoctorNames,
         getDoctor: getDoctor,
         getAdminDoctors: getAdminDoctors,
         deleteDoctor: deleteDoctor,
@@ -27,13 +28,31 @@ function doctorService($http, Auth) {
             var data = response.data;
             for (var i = 0; i < data.length; i++) {
                 sortState(data[i]);
-                styleState(data[i]);
             }
             return data;
         }
 
         function getDoctorsFailed(error) {
             console.log('XHR Failed for getDoctors.' + error.data);
+        }
+    }
+
+    function getDoctorNames() {
+        return $http.get('/api/doctors')
+            .then(getDoctorsComplete)
+            .catch(getDoctorsFailed);
+
+        function getDoctorsComplete(response) {
+            var data = response.data;
+            var nameArray = [];
+            for (var i = 0; i < data.length; i++) {
+                nameArray.push(data[i].lastName + " " + data[i].firstName);
+            }
+            return nameArray;
+        }
+
+        function getDoctorsFailed(error) {
+            console.log('XHR Failed for getDoctorNames.' + error.data);
         }
     }
 
@@ -101,23 +120,6 @@ function doctorService($http, Auth) {
         }
         else {
             data.style.label = (data.nbPatient * data.averageTime) + ' mn';
-        }
-    }
-
-    function styleState(data) {
-        if (data.state === 'close' || data.state === 'nothing') {
-            data.style.color = 'marker-labels-grey';
-        }
-        else if (data.state === 'appointment') {
-            data.style.color = 'marker-labels-blue';
-        }
-        else {
-            if ((data.nbPatient * data.averageTime) >= 60) {
-                data.style.color = 'marker-labels-red';
-            }
-            else {
-                data.style.color = 'marker-labels-green';
-            }
         }
     }
 }

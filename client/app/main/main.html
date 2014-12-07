@@ -14,8 +14,8 @@
         <ui-gmap-marker ng-repeat="doctor in vm.doctors"
                         coords="doctor.coords"
                         options="{
-                            labelContent: doctor.style.label,
-                            labelClass: doctor.style.color
+                            labelContent: 'Dr. '+doctor.lastName,
+                            labelClass: 'marker-labels-orange'
                         }"
                         click="vm.clickOnMarker(doctor)"
                         idkey="$index">

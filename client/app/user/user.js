@@ -6,7 +6,6 @@ angular.module('timerDocFullstackApp')
       .state('user', {
         url: '/user',
         templateUrl: 'app/user/user.html',
-        controller: 'UserCtrl',
-        controllerAs: 'vm'
+        controller: 'UserCtrl'
       });
   });

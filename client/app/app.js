@@ -16,7 +16,8 @@ angular.module('timerDocFullstackApp', [
 
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
-  })
+
+    })
 
   .config(['GoogleMapApiProvider'.ns(), function (GoogleMapApi) {
       GoogleMapApi.configure({

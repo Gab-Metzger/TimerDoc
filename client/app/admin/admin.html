@@ -1,15 +1,15 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <div class="container">
-    <div class="row">
+    <div class="row admin-page">
         <div class="col-md-12">
             <table class="table table-bordered">
                 <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Number Patient</th>
-                    <th>Room State</th>
-                    <th>Delete</th>
+                    <th>Nom - Prénom</th>
+                    <th>Adresse</th>
+                    <th>Nombre de patients</th>
+                    <th>État de la salle d'attente</th>
+                    <th>Supprimer</th>
                 </tr>
                 <tr ng-repeat="doc in vm.doctors">
                     <td>{{doc.lastName}} {{doc.firstName}}</td>
@@ -36,7 +36,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <button type="button" class="btn btn-primary btn-lg active" ng-click="vm.section1=!(vm.section1)"><i class="glyphicon glyphicon-plus"></i> Add a new Doctor</button>
+            <button type="button" class="btn btn-primary btn-lg active" ng-click="vm.section1=!(vm.section1)"><i class="glyphicon glyphicon-plus"></i> Ajouter un médecin</button>
         </div>
 
     </div>
