@@ -17,7 +17,7 @@ angular.module('timerDocFullstackApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/settings');
+          $location.path('/user');
         })
         .catch( function(err) {
           err = err.data;

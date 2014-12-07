@@ -4,6 +4,8 @@ angular.module('timerDocFullstackApp')
     .controller('UserCtrl', ['$scope', 'Auth', 'User', 'doctorService', function ($scope, Auth, User, doctorService) {
         $scope.doctors = [];
         $scope.user = Auth.getCurrentUser();
+        $scope.messageSuccess = false;
+        $scope.messageError = false;
 
         activate();
 
@@ -29,9 +31,9 @@ angular.module('timerDocFullstackApp')
                 phone: user.phone,
                 doctor: user.doctor
             }, function(user) {
-                console.log(user);
+                $scope.messageSuccess = true;
             }, function (err) {
-                console.log(err);
+                $scope.messageError = true;
             });
         };
 
