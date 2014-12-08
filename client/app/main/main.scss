@@ -1,4 +1,7 @@
-.angular-google-map-container { height: 400px; }
+.angular-google-map-container {
+  height: 400px;
+  margin-bottom: 30px;
+}
 
 .pac-controls {
   margin-top: 16px;
@@ -60,6 +63,10 @@
 
 .button-rdv {
   margin-left: 70px;
+}
+
+.alert > a {
+  color: #8f8f8f;
 }
 
 .footer {

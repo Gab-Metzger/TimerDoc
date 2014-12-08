@@ -5,14 +5,15 @@
         .module('timerDocFullstackApp')
         .controller('MainCtrl', MainCtrl);
 
-    MainCtrl.$inject = ['socket', 'GoogleMapApi'.ns(), 'geolocation', 'doctorService'];
+    MainCtrl.$inject = ['socket', 'GoogleMapApi'.ns(), 'geolocation', 'doctorService', 'Auth'];
 
-    function MainCtrl(socket, GoogleMapApi, geolocation, doctorService) {
+    function MainCtrl(socket, GoogleMapApi, geolocation, doctorService, Auth) {
 
         /*jshint validthis: true */
         var vm = this;
         vm.doctors = [];
         vm.clickOnMarker = clickOnMarker;
+        vm.isConnected = Auth.isLoggedIn();
 
         activate();
 
